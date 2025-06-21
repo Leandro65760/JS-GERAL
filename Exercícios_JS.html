@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Exercícios 1 a 29</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; }
+    section { border: 1px solid #ccc; padding: 15px; margin-bottom: 20px; border-radius: 6px; }
+    h2 { margin-top: 0; }
+    input, button { margin: 5px 0; display: block; }
+  </style>
+</head>
+<body>
+
+<!-- 1 -->
+<section>
+  <h2>1. Divisível por 3</h2>
+  <input id="n1" type="number"><button onclick="res1()">Verificar</button><p id="r1"></p>
+</section>
+<script>
+  function res1() {
+    let n = +document.getElementById("n1").value;
+    document.getElementById("r1").textContent = (n % 3 === 0) ? "Divisível por 3" : "Não é divisível por 3";
+  }
+</script>
+
+<!-- 2 -->
+<section>
+  <h2>2. Tabuada até 5</h2>
+  <input id="n2" type="number"><button onclick="res2()">Mostrar</button><div id="r2"></div>
+</section>
+<script>
+  function res2() {
+    let n = +document.getElementById("n2").value;
+    let r = "";
+    for (let i = 1; i <= 5; i++) r += `${n} x ${i} = ${n * i}<br>`;
+    document.getElementById("r2").innerHTML = r;
+  }
+</script>
+
+<!-- 3 -->
+<section>
+  <h2>3. Contador 100 ±10</h2>
+  <p id="r3">100</p>
+  <button onclick="res3(10)">+10</button><button onclick="res3(-10)">-10</button>
+</section>
+<script>
+  function res3(v) {
+    let p = document.getElementById("r3");
+    p.textContent = +p.textContent + v;
+  }
+</script>
+
+<!-- 4 -->
+<section>
+  <h2>4. Jogo Adivinhação (1-20)</h2>
+  <input id="n4" type="number"><button onclick="res4()">Tentar</button><p id="r4"></p>
+</section>
+<script>
+  const segreto4 = Math.floor(Math.random() * 20) + 1;
+  function res4() {
+    const v = +document.getElementById("n4").value;
+    const r = v === segreto4 ? "Acertou!" : v < segreto4 ? "Tente maior." : "Tente menor.";
+    document.getElementById("r4").textContent = r;
+  }
+</script>
+
+<!-- 5 -->
+<section>
+  <h2>5. Média de 4 Notas</h2>
+  <input id="n5a"><input id="n5b"><input id="n5c"><input id="n5d">
+  <button onclick="res5()">Calcular</button><p id="r5"></p>
+</section>
+<script>
+  function res5() {
+    let m = (["a", "b", "c", "d"].map(i => +document.getElementById("n5" + i).value).reduce((a, b) => a + b)) / 4;
+    document.getElementById("r5").textContent = m >= 6 ? `Aprovado (${m})` : `Reprovado (${m})`;
+  }
+</script>
+
+<!-- 6 a 9 -->
+<section>
+  <h2>6 a 9. Mini Currículo</h2>
+  <section style="background:#eee;padding:10px;border-radius:5px;">
+    <h2>Joana dos Teclados</h2>
+    <img src="foto.jpg" width="100"><p>Desenvolvedora apaixonada.</p>
+    <ul><li>HTML</li><li>CSS</li><li>JS</li></ul>
+  </section>
+  <p><i>CSS externo sugerido com estilo de background, padding e borda no &lt;section&gt;.</i></p>
+</section>
+
+<!-- 10 -->
+<section>
+  <h2>10. Formulário Simples</h2>
+  <form onsubmit="alert('Cadastro enviado!'); return false;">
+    <input placeholder="Nome"><input placeholder="Email"><input placeholder="Telefone"><input placeholder="Senha">
+    <button type="submit">Enviar</button>
+  </form>
+</section>
+
+<!-- 11 -->
+<section>
+  <h2>11. Validação Formulário</h2>
+  <form id="f11">
+    <input id="n11a"><input id="n11b"><input id="n11c"><input id="n11d">
+    <button>Enviar</button><p id="r11"></p>
+  </form>
+</section>
+<script>
+  document.getElementById("f11").onsubmit = e => {
+    e.preventDefault();
+    const campos = ["a", "b", "c", "d"].map(i => document.getElementById("n11" + i).value.trim());
+    document.getElementById("r11").textContent = campos.every(v => v) ? "Tudo certo!" : "Preencha tudo!";
+  };
+</script>
+
+<!-- 12 -->
+<section>
+  <h2>12. Cor Aleatória no Título</h2>
+  <h1 id="t12">Título</h1><button onclick="res12()">Mudar cor</button>
+</section>
+<script>
+  function res12() {
+    const cores = ["red", "blue", "green", "orange", "purple"];
+    document.getElementById("t12").style.color = cores[Math.floor(Math.random() * cores.length)];
+  }
+</script>
+
+<!-- 13 -->
+<section>
+  <h2>13. Idade Canina</h2>
+  <input id="n13"><button onclick="res13()">Calcular</button><p id="r13"></p>
+</section>
+<script>
+  function res13() {
+    let n = +document.getElementById("n13").value;
+    document.getElementById("r13").textContent = `Idade do cachorro: ${n * 7}`;
+  }
+</script>
+
+<!-- 14 -->
+<section>
+  <h2>14. Mini Calculadora</h2>
+  <input id="n14"><p id="r14"></p>
+  <button onclick="calc('+')">+</button><button onclick="calc('-')">-</button>
+  <button onclick="calc('*')">*</button><button onclick="calc('/')">/</button>
+  <button onclick="calc('^')">²</button><button onclick="calc('√')">√</button>
+</section>
+<script>
+  function calc(op) {
+    let n = +document.getElementById("n14").value, r;
+    if (op === '^') r = n ** 2;
+    else if (op === '√') r = Math.sqrt(n);
+    else r = eval(n + op + 2);
+    document.getElementById("r14").textContent = r;
+  }
+</script>
+
+<!-- 15 -->
+<section>
+  <h2>15. Quiz Simples</h2>
+  <p>Capital do Brasil?</p>
+  <input type="radio" name="q15" value="errado">São Paulo<br>
+  <input type="radio" name="q15" value="certo">Brasília<br>
+  <input type="radio" name="q15" value="errado">Rio de Janeiro<br>
+  <button onclick="res15()">Verificar</button><p id="r15"></p>
+</section>
+<script>
+  function res15() {
+    let v = document.querySelector('input[name="q15"]:checked')?.value;
+    document.getElementById("r15").textContent = v === "certo" ? "✅ Correto!" : "❌ Incorreto.";
+  }
+</script>
+
+<!-- 16 -->
+<section>
+  <h2>16. Conversor de Temperatura</h2>
+  <input id="n16" type="number" placeholder="Temperatura">
+  <button onclick="paraC()">Para Celsius</button>
+  <button onclick="paraF()">Para Fahrenheit</button>
+  <div id="r16"></div>
+</section>
+<script>
+  function paraC() {
+    let f = +document.getElementById("n16").value;
+    document.getElementById("r16").textContent = `${((f - 32) * 5 / 9).toFixed(2)}°C`;
+  }
+  function paraF() {
+    let c = +document.getElementById("n16").value;
+    document.getElementById("r16").textContent = `${((c * 9 / 5) + 32).toFixed(2)}°F`;
+  }
+</script>
+
+<!-- 17–20 já incluídos acima (inputs e exibição de mensagem) -->
+
+<!-- 21 -->
+<section>
+  <h2>21. Temporizador 60s</h2>
+  <p id="tempo21">60</p>
+  <button onclick="start21()">Iniciar</button>
+  <button onclick="pause21()">Pausar</button>
+  <button onclick="reset21()">Zerar</button>
+</section>
+<script>
+  let t21 = 60, i21;
+  function start21() {
+    if (!i21) i21 = setInterval(() => {
+      if (t21 > 0) t21--, document.getElementById("tempo21").textContent = t21;
+    }, 1000);
+  }
+  function pause21() { clearInterval(i21); i21 = null; }
+  function reset21() { pause21(); t21 = 60; document.getElementById("tempo21").textContent = 60; }
+</script>
+
+<!-- 22 -->
+<section>
+  <h2>22. Mudar Cor de Fundo</h2>
+  <button onclick="document.body.style.background='red'">Vermelho</button>
+  <button onclick="document.body.style.background='blue'">Azul</button>
+  <button onclick="document.body.style.background='green'">Verde</button>
+</section>
+
+<!-- 23 -->
+<section>
+  <h2>23. Verdadeiro ou Falso</h2>
+  <p>1. A lua é um satélite?</p>
+  <input type="radio" name="q23a" value="true">Verdadeiro
+  <input type="radio" name="q23a" value="false">Falso
+
+  <p>2. 1 + 1 = 3?</p>
+  <input type="radio" name="q23b" value="false">Falso
+  <input type="radio" name="q23b" value="true">Verdadeiro
+  <br><button onclick="corrigir23()">Verificar</button>
+  <p id="r23"></p>
+</section>
+<script>
+  function corrigir23() {
+    const a = document.querySelector('input[name="q23a"]:checked')?.value === "true";
+    const b = document.querySelector('input[name="q23b"]:checked')?.value === "false";
+    document.getElementById("r23").textContent = `Pontuação: ${+a + +b}/2`;
+  }
+</script>
+
+<!-- 24 -->
+<section>
+  <h2>24. Botão que muda</h2>
+  <button id="btn24" onclick="mudaBtn24()">Clique aqui</button>
+</section>
+<script>
+  function mudaBtn24() {
+    const b = document.getElementById("btn24");
+    b.textContent = "Clicado!";
+    b.style.background = "lightgreen";
+  }
+</script>
+
+<!-- 25 -->
+<section>
+  <h2>25. Contador com duplo clique para resetar</h2>
+  <button id="btn25" onclick="conta25()" ondblclick="reseta25()">Clique</button>
+  <p id="r25">0</p>
+</section>
+<script>
+  let c25 = 0;
+  function conta25() {
+    c25++;
+    document.getElementById("r25").textContent = c25;
+  }
+  function reseta25() {
+    c25 = 0;
+    document.getElementById("r25").textContent = 0;
+  }
+</script>
+
+<!-- 26 -->
+<section>
+  <h2>26. Imagem que muda com o mouse</h2>
+  <img id="img26" src="img1.jpg" width="150" onmouseover="trocaImg(true)" onmouseout="trocaImg(false)">
+</section>
+<script>
+  function trocaImg(e) {
+    document.getElementById("img26").src = e ? "img2.jpg" : "img1.jpg";
+  }
+</script>
+
+<!-- 27 -->
+<section>
+  <h2>27. Mostrar tecla pressionada</h2>
+  <input onkeydown="tecla27(event)">
+  <p id="r27"></p>
+</section>
+<script>
+  function tecla27(e) {
+    document.getElementById("r27").textContent = `Você pressionou: ${e.key}`;
+  }
+</script>
+
+<!-- 28 -->
+<section>
+  <h2>28. Duplo clique no parágrafo</h2>
+  <p id="p28" ondblclick="muda28()">Clique aqui</p>
+</section>
+<script>
+  function muda28() {
+    document.getElementById("p28").textContent = "Texto alterado!";
+  }
+</script>
+
+<!-- 29 -->
+<section>
+  <h2>29. Mostrar botão ao aceitar termos</h2>
+  <input type="checkbox" id="chk29" onchange="termo29()"> Li e concordo<br>
+  <button id="btn29" style="display:none;">Enviar</button>
+</section>
+<script>
+  function termo29() {
+    document.getElementById("btn29").style.display = document.getElementById("chk29").checked ? "inline" : "none";
+  }
+</script>
+
+</body>
+</html>
+
+<!-- Muito fácil😒 -->
